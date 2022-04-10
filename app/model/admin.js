@@ -5,6 +5,9 @@ module.exports = app => {
   const AdminSchema = new Schema({
     userName: { type: String },
     password: { type: String },
+  }, {
+    collection: 'admin', // 默认的查找集合名称，不加他会查找admins
+    versionKey: false,
   });
-  return mongoose.model('User', AdminSchema);
+  return mongoose.model('Admin', AdminSchema);
 };
