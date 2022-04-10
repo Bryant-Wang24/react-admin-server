@@ -5,5 +5,6 @@
  */
 module.exports = app => {
   const { router, controller } = app;
-  router.post('/admin/login', controller.admin.adminLogin);
+  const baseRouter = app.config.baseRouter;
+  router.post(baseRouter + '/admin/login', controller.admin.adminLogin);
 };

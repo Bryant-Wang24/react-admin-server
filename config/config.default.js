@@ -1,7 +1,7 @@
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
-
+const userConfig = require('./config.user');
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -19,13 +19,7 @@ module.exports = appInfo => {
   config.middleware = [];
 
   // add your user config here
-  const userConfig = {
-    // myAppName: 'egg',
-    news: {
-      limit: 5,
-      serverUrl: 'https://cnodejs.org/api/v1/topics',
-    },
-  };
+
 
   config.view = {
     defaultViewEngine: 'nunjucks',
