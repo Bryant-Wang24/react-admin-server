@@ -10,4 +10,12 @@ module.exports = {
     enable: true,
     package: 'egg-view-nunjucks',
   },
+  // validate: {
+  //   enable: true,
+  //   package: 'egg-validate',
+  // },
+  mongoose: {
+    enable: true,
+    package: 'egg-mongoose',
+  },
 };
