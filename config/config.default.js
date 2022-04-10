@@ -36,6 +36,9 @@ module.exports = appInfo => {
       enable: false,
     },
   };
+  config.jwt = {
+    secret: userConfig.username,
+  };
 
   return {
     ...config,

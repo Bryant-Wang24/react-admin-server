@@ -6,7 +6,7 @@ class AdminController extends Controller {
   constructor(ctx) {
     super(ctx);
     this.createRule = {
-      userName: {
+      username: {
         type: 'string',
         min: 5,
         max: 20,
@@ -26,7 +26,7 @@ class AdminController extends Controller {
     const data = ctx.request.body;
     ctx.validate(this.createRule, data);
     const res = await service.admin.adminLogin(data);
-    ctx.body = res;
+    ctx.helper.success({ ctx, res });
   }
 }
 
