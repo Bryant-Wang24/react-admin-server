@@ -2,7 +2,7 @@
 const Service = require('egg').Service;
 class AdminService extends Service {
   async adminLogin(params) {
-    const { ctx,app } = this;
+    const { ctx, app } = this;
     const oldUser = await ctx.model.Admin.findOne({
       username: params.username,
     });
@@ -20,7 +20,7 @@ class AdminService extends Service {
         msg: '用户名或密码错误',
       };
     }
-    const token = app.jwt.sign({...oldUser}, app.config.jwt.secret, {
+    const token = app.jwt.sign({ ...oldUser }, app.config.jwt.secret, {
       expiresIn: '1h', // 过期时间
     });
     ctx.cookies.set('token', token, {
