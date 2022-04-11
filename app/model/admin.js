@@ -1,3 +1,4 @@
+'use strict';
 const helper = require('../extend/helper');
 module.exports = app => {
   const mongoose = app.mongoose;

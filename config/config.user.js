@@ -1,4 +1,4 @@
-
+'use strict';
 module.exports = {
   // 全局配置
   username: 'wrangling',
