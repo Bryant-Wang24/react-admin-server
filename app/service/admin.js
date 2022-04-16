@@ -32,11 +32,23 @@ class AdminService extends Service {
         token,
         username: oldUser.username,
       },
+      msg: '登录成功',
     };
 
 
     // const res = await ctx.model.Admin.create(params);
     // return res;
+  }
+  async adminLogout() {
+    const { ctx } = this;
+    ctx.cookies.set('token', null, {
+      maxAge: 0,
+      httpOnly: true,
+    });
+    return {
+      code: 0,
+      msg: '退出成功',
+    };
   }
 }
 module.exports = AdminService;

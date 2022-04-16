@@ -20,6 +20,7 @@ module.exports = app => {
     adminUser.password = hash;
     const oldUser = await AdminModel.findOne({ username: adminUser.username });
     if (!oldUser) {
+      console.log('没有admin用户，创建admin用户');
       await AdminModel.create(adminUser);
     }
   });
