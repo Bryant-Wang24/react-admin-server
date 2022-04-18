@@ -31,6 +31,13 @@ class TagsController extends Controller {
     });
     ctx.helper.success({ ctx, res });
   }
+  async destroy() {
+    const { ctx, service } = this;
+    const id = ctx.params.id;
+    console.log('id', id);
+    const res = await service.tags.destory(id);
+    ctx.helper.success({ ctx, res });
+  }
 }
 
 module.exports = TagsController;

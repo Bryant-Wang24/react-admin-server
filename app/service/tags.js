@@ -2,7 +2,7 @@
 const Service = require('egg').Service;
 class TagsService extends Service {
   async create(params) {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const oldTags = await ctx.model.Tags.findOne(
       {
         name: params.name,
@@ -26,7 +26,7 @@ class TagsService extends Service {
     };
   }
   async update(params) {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const oldTags = await ctx.model.Tags.findOne(
       {
         name: params.name,
@@ -52,6 +52,30 @@ class TagsService extends Service {
     return {
       code: 0,
       msg: '标签更新成功',
+      data: res,
+    };
+  }
+  async destory(id) {
+    const { ctx } = this;
+    const oldTags = await ctx.model.Tags.findOne(
+      {
+        _id: id,
+      }
+    );
+    if (!oldTags) {
+      return {
+        code: -1,
+        msg: '标签不存在',
+      };
+    }
+    const res = await ctx.model.Tags.deleteOne(
+      {
+        _id: id,
+      }
+    );
+    return {
+      code: 0,
+      msg: '标签删除成功',
       data: res,
     };
   }
