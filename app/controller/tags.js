@@ -21,6 +21,16 @@ class TagsController extends Controller {
     const res = await service.tags.create(data);
     ctx.helper.success({ ctx, res });
   }
+  async update() {
+    const { ctx, service } = this;
+    const data = ctx.request.body;
+    const id = ctx.params.id;
+    const res = await service.tags.update({
+      id,
+      name: data.name,
+    });
+    ctx.helper.success({ ctx, res });
+  }
 }
 
 module.exports = TagsController;

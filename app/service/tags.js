@@ -25,16 +25,35 @@ class TagsService extends Service {
       data: res,
     };
   }
-  // async adminLogout() {
-  //   const { ctx } = this;
-  //   ctx.cookies.set('token', null, {
-  //     maxAge: 0,
-  //     httpOnly: true,
-  //   });
-  //   return {
-  //     code: 0,
-  //     msg: '退出成功',
-  //   };
-  // }
+  async update(params) {
+    const { ctx, app } = this;
+    const oldTags = await ctx.model.Tags.findOne(
+      {
+        name: params.name,
+      }
+    );
+    if (oldTags) {
+      return {
+        code: -1,
+        msg: '标签已存在',
+      };
+    }
+    const data = {
+      createTime: new Date(),
+      ...params,
+      updateTime: new Date(),
+    };
+    const res = await ctx.model.Tags.updateOne(
+      {
+        _id: params.id,
+      },
+      data
+    );
+    return {
+      code: 0,
+      msg: '标签更新成功',
+      data: res,
+    };
+  }
 }
 module.exports = TagsService;
