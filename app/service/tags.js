@@ -1,6 +1,22 @@
 'use strict';
 const Service = require('egg').Service;
 class TagsService extends Service {
+  async index(params) {
+    const { ctx } = this;
+    const page = params.page * 1 || 1;
+    const pageSize = params.pageSize * 1 || 10;
+    // name是模糊匹配
+    const queryCon = params.name ? { name: { $regex: new RegExp(params.name, 'i') } } : {};
+    const data = await ctx.model.Tags.find(queryCon).sort({ createTime: -1 }).skip((page - 1) * pageSize)
+      .limit(pageSize);
+    return {
+      data: {
+        page,
+        pageSize,
+        list: data,
+      },
+    };
+  }
   async create(params) {
     const { ctx } = this;
     const oldTags = await ctx.model.Tags.findOne(
