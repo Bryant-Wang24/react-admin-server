@@ -7,12 +7,14 @@ class TagsService extends Service {
     const pageSize = params.pageSize * 1 || 10;
     // name是模糊匹配
     const queryCon = params.name ? { name: { $regex: new RegExp(params.name, 'i') } } : {};
+    const totalCount = await ctx.model.Tags.find(queryCon).countDocuments();
     const data = await ctx.model.Tags.find(queryCon).sort({ createTime: -1 }).skip((page - 1) * pageSize)
       .limit(pageSize);
     return {
       data: {
         page,
         pageSize,
+        totalCount,
         list: data,
       },
     };
